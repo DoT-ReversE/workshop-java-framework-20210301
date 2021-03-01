@@ -6,5 +6,5 @@ mvnw spring-boot:run
 // Run test
 mvnw clean test
 
-// Run coverage report (target/site/jacoco/index.html)
+// Run coverage report (target/site/jacoco/index.html
 mvnw package
