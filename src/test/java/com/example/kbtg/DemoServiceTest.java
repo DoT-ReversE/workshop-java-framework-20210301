@@ -14,7 +14,7 @@ public class DemoServiceTest {
     @DisplayName("ในการทำงานต้อง random ได้ค่า 5")
     public void random_5() {
         DemoService demoService = new DemoService();
-        demoService.setRandom(new Random5());
+        demoService.setRandom(new MockRandom(5));
         String actualResult =demoService.generateData("somkiat");
         assertEquals("somkiat5", actualResult);
     }
@@ -23,25 +23,23 @@ public class DemoServiceTest {
     @DisplayName("Should throw runtime exception when random is not between 5 and 8")
     public void random_4() {
         DemoService demoService = new DemoService();
-        demoService.setRandom(new Random4());
-        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
+        demoService.setRandom(new MockRandom(4));
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
             demoService.generateData("somkiat");
         });
 
-        assertTrue(thrown.getMessage().equals("Invalid number with " + 4));
+        assertEquals("Invalid number with 4", exception.getMessage());
     }
 }
 
-class Random4 extends Random {
-    @Override
-    public int nextInt(int bound) {
-        return 4;
+class MockRandom extends Random {
+    int randomNumber;
+    public MockRandom(int randomNumber) {
+        this.randomNumber = randomNumber;
     }
-}
 
-class Random5 extends Random {
     @Override
     public int nextInt(int bound) {
-        return 5;
+        return randomNumber;
     }
 }
