@@ -20,7 +20,7 @@ public class DemoServiceTest {
     }
 
     @Test
-    @DisplayName("Should throw runtime exception when random is not between 5 and 8")
+    @DisplayName("Should throw runtime exception when random is 4")
     public void random_4() {
         DemoService demoService = new DemoService();
         demoService.setRandom(new MockRandom(4));
@@ -29,6 +29,18 @@ public class DemoServiceTest {
         });
 
         assertEquals("Invalid number with 4", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should throw runtime exception when random is 9")
+    public void random_9() {
+        DemoService demoService = new DemoService();
+        demoService.setRandom(new MockRandom(9));
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            demoService.generateData("somkiat");
+        });
+
+        assertEquals("Invalid number with 9", exception.getMessage());
     }
 }
 
