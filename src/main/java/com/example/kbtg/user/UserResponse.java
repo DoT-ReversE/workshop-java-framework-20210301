@@ -37,4 +37,14 @@ public class UserResponse {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        UserResponse compareObj = (UserResponse) obj;
+        boolean isEquals =
+                this.id.equals(compareObj.getId())
+                && this.name.equals(compareObj.getName())
+                && this.age.equals(compareObj.getAge());
+        return isEquals;
+    }
 }
