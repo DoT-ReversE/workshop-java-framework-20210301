@@ -40,11 +40,15 @@ public class UserResponse {
 
     @Override
     public boolean equals(Object obj) {
-        UserResponse compareObj = (UserResponse) obj;
-        boolean isEquals =
-                this.id.equals(compareObj.getId())
-                && this.name.equals(compareObj.getName())
-                && this.age.equals(compareObj.getAge());
+        boolean isEquals = false;
+        boolean isSameClass = obj != null && getClass() == obj.getClass();
+        if (isSameClass) {
+            UserResponse compareObj = (UserResponse) obj;
+            isEquals =
+                    this.id.equals(compareObj.getId())
+                    && this.name.equals(compareObj.getName())
+                    && this.age.equals(compareObj.getAge());
+        }
         return isEquals;
     }
 }
