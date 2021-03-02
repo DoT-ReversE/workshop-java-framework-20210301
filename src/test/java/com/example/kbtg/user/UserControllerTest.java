@@ -1,5 +1,6 @@
 package com.example.kbtg.user;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,8 @@ public class UserControllerTest {
     @Test
     public void success_get_user_id_1() {
         // Act
-        UserResponse response = restTemplate.getForObject("/user/1", UserResponse.class);
+        UserResponse response
+                = restTemplate.getForObject("/user/1", UserResponse.class);
         // Assert
         assertEquals(1, response.getId());
         assertEquals("somkiat", response.getName());
@@ -30,9 +32,12 @@ public class UserControllerTest {
 
     @Test
     public void user_not_found_with_user_id_15() {
-        ErrorResponse response = restTemplate.getForObject("/user/15", ErrorResponse.class);
-        ErrorResponse expected = new ErrorResponse(1234, "User not found id=15");
-        assertEquals(expected, response);
+        // Act
+        ErrorResponse response
+                = restTemplate.getForObject("/user/15", ErrorResponse.class);
+        // Assert
+        assertEquals(1234, response.getCode());
+        assertEquals("User not found id=15", response.getMessage());
     }
 
 }
