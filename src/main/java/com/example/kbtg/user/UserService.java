@@ -8,8 +8,12 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserResponse getInfo(int id) {
         Optional<MyUser> myUserOptional = userRepository.findById(id);
@@ -22,4 +26,5 @@ public class UserService {
         // Fail
         throw new UserNotFoundException("User not found id="+ id);
     }
+
 }
