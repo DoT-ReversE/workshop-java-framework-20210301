@@ -16,8 +16,16 @@ public class UserControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     public void success_get_user_id_1() {
+        // Arrange
+        MyUser somkiat = new MyUser();
+        somkiat.setName("somkiat");
+        somkiat.setAge(30);
+        userRepository.save(somkiat);
         // Act
         UserResponse response
                 = restTemplate.getForObject("/user/1", UserResponse.class);
