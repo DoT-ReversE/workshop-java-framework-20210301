@@ -43,6 +43,6 @@ public class PostGatewayTest {
         String url = String.format("%s/posts/%d", postApiUrl, 1);
         when(restTemplate.getForObject(url, PostResponse.class)).thenThrow(new RestClientException(""));
         Optional<PostResponse> actual = postGateway.getPostById(1);
-        assertTrue(!actual.isPresent());
+        assertFalse(actual.isPresent());
     }
 }
