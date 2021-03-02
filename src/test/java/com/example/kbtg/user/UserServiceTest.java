@@ -36,7 +36,7 @@ public class UserServiceTest {
     @Test
     public void user_not_found_with_id_15_should_throw_exception() {
         // Arrange
-        when(userRepository.findById(15)).thenThrow(new UserNotFoundException("User not found id=15"));
+        when(userRepository.findById(15)).thenReturn(Optional.empty());
         // Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             UserService userService = new UserService(userRepository);
