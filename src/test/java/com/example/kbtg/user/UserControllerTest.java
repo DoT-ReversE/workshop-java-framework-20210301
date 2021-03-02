@@ -1,5 +1,6 @@
 package com.example.kbtg.user;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class UserControllerTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @AfterEach
+    public void clearData() {
+        userRepository.deleteAll();
+    }
 
     @Test
     public void success_get_user_id_1() {
