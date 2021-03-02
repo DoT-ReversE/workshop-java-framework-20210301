@@ -9,8 +9,15 @@ public class DemoService {
     }
 
     public String generateData(String name) {
-        int number = random.nextInt(10);
-        return name + number;
+        int number = random.nextInt(10); // 0-9
+        if(number >= 5 && number<=8) {
+            return name + number;
+        }
+        throw new RuntimeException("Invalid number with " + number);
+        /*
+        1. Checked exception => compile time
+        2. Unchecked exception => runtime => NPE, ArrayIndexOutOfBound, OOM, ClassCastException
+         */
     }
 
 //    public static void main(String[] args) {

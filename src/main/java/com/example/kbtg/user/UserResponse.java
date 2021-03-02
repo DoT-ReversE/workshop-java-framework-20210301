@@ -1,6 +1,8 @@
 package com.example.kbtg.user;
 
-public class UserResponse {
+import java.util.Objects;
+
+public class UserResponse extends Object {
     private Integer id;
     private String name;
     private Integer age;
@@ -11,6 +13,14 @@ public class UserResponse {
     public UserResponse(Integer id, String name, Integer age) {
         this.id = id;
         this.name = name;
+        this.age = age;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -30,25 +40,16 @@ public class UserResponse {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserResponse that = (UserResponse) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(age, that.age);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        boolean isEquals = false;
-        boolean isSameClass = obj != null && getClass() == obj.getClass();
-        if (isSameClass) {
-            UserResponse compareObj = (UserResponse) obj;
-            isEquals =
-                    this.id.equals(compareObj.getId())
-                    && this.name.equals(compareObj.getName())
-                    && this.age.equals(compareObj.getAge());
-        }
-        return isEquals;
+    public int hashCode() {
+        return Objects.hash(id, name, age);
     }
 }
