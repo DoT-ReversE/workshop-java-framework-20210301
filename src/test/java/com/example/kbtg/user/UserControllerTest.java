@@ -18,14 +18,20 @@ public class UserControllerTest {
     @Test
     public void success_get_user_id_1() {
         // Act
-        UserResponse response
-                = restTemplate.getForObject("/user/1", UserResponse.class);
+        UserResponse response = restTemplate.getForObject("/user/1", UserResponse.class);
         // Assert
         assertEquals(1, response.getId());
         assertEquals("somkiat", response.getName());
         assertEquals(30, response.getAge());
         // Quiz
         UserResponse expected = new UserResponse(1, "somkiat", 30);
+        assertEquals(expected, response);
+    }
+
+    @Test
+    public void user_not_found_with_user_id_15() {
+        ErrorResponse response = restTemplate.getForObject("/user/15", ErrorResponse.class);
+        ErrorResponse expected = new ErrorResponse(1234, "User not found id=15");
         assertEquals(expected, response);
     }
 
